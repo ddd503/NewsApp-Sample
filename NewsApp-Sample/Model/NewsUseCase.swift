@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NewsUseCase {
-    func readNewsList(_ completion: (Result<[NewsArticle], Error>) -> Void)
+    func readNewsList(_ completion: @escaping (Result<[NewsArticle], Error>) -> Void)
 }
 
 struct NewsUseCaseImpl: NewsUseCase {
@@ -18,7 +18,16 @@ struct NewsUseCaseImpl: NewsUseCase {
         self.newsAPIRepository = newsAPIRepository
     }
 
-    func readNewsList(_ completion: (Result<[NewsArticle], Error>) -> Void) {
-        // TODO: ニュース記事一覧を取得する
+    func readNewsList(_ completion: @escaping (Result<[NewsArticle], Error>) -> Void) {
+        newsAPIRepository.request { result in
+            switch result {
+            case .success(let newsAPIResponse):
+                completion(.success(newsAPIResponse.items.map {
+                    NewsArticle(category: $0.category, title: $0.title, content: $0.content, date: $0.date, img: $0.img)
+                }))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }

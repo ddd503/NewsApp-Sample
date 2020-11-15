@@ -6,7 +6,9 @@
 //
 
 struct NewsArticle {
-    let newsId: String
+    let category: String
     let title: String
-    let description: String
+    let content: String
+    let date: String
+    let img: String
 }

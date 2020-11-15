@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NewsTopViewModel: Injectable {
+struct NewsTopViewModel: Injectable {
     struct Input {}
 
     struct Output {}

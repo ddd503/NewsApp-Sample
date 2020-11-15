@@ -8,11 +8,11 @@
 import Foundation
 
 protocol NewsAPIRepository {
-    func request(_ completion: (Result<Data, Error>) -> Void)
+    func request(_ completion: @escaping (Result<NewsAPIResponse, Error>) -> Void)
 }
 
 struct NewsAPIRepositoryImpl: NewsAPIRepository {
-    func request(_ completion: (Result<Data, Error>) -> Void) {
-        // TODO: NewsAPIにアクセスする
+    func request(_ completion: @escaping (Result<NewsAPIResponse, Error>) -> Void) {
+        // TODO: NewsAPIから情報を取得する
     }
 }
